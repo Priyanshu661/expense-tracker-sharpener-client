@@ -33,11 +33,12 @@ export default function Home() {
 
   const [leaderboardData, setLeaderboardData] = useState([]);
 
-
-  const [itemsPerPage,setItemsPerPage]=useState(5)
-  useEffect(()=>{
-    setItemsPerPage(localStorage.getItem("limit"))
-  },[])
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  useEffect(() => {
+    if (localStorage.getItem("limit")) {
+      setItemsPerPage(localStorage.getItem("limit"));
+    }
+  }, []);
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -48,8 +49,6 @@ export default function Home() {
       setIsPremium(true);
     }
   }, []);
-
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,9 +72,8 @@ export default function Home() {
 
   const [expenseCount, setExpenseCount] = useState(0);
 
-  const [monthlyExpenseAMount,setMonthlyExpenseAmount]=useState([])
+  const [monthlyExpenseAMount, setMonthlyExpenseAmount] = useState([]);
   const [yearlyExpenseAMount, setYearlyExpenseAmount] = useState([]);
-
 
   const handleAddExpense = () => {
     addExpense(details).then((res) => {
@@ -90,11 +88,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchExpenses(currentPage,itemsPerPage)
+    fetchExpenses(currentPage, itemsPerPage)
       .then((res) => {
         if (res?.data) {
           setExpenseData(res.data);
-          setMonthlyExpenseAmount(res?.monthlyExpenseAmount)
+          setMonthlyExpenseAmount(res?.monthlyExpenseAmount);
           setYearlyExpenseAmount(res?.yearlyExpenseAmount);
 
           setExpenseCount(res?.expensesCount);
@@ -103,7 +101,7 @@ export default function Home() {
         }
       })
       .catch((e) => console.log(e));
-  }, [run,currentPage,itemsPerPage]);
+  }, [run, currentPage, itemsPerPage]);
 
   const handleDeleteExpense = (id) => {
     deleteExpense(id).then((res) => {
@@ -158,8 +156,6 @@ export default function Home() {
       }
     });
   };
-
-
 
   return (
     <div>
@@ -260,22 +256,20 @@ export default function Home() {
             }}
           >
             <div>
-            <label>Items Per Page</label>
-              <select 
-              value={itemsPerPage}
-              onChange={(e)=>{
-                
-                setItemsPerPage(e.target.value)
-                localStorage.setItem("limit", e.target.value);
-                
+              <label>Items Per Page</label>
+              <select
+                value={itemsPerPage}
+                onChange={(e) => {
+                  setItemsPerPage(e.target.value);
+                  localStorage.setItem("limit", e.target.value);
                 }}
               >
-                {[5, 8, 10].map((item, index) =>(
+                {[5, 8, 10].map((item, index) => (
                   <option key={index} value={item}>
                     {" "}
                     {item}
                   </option>
-               ))}
+                ))}
               </select>
             </div>
             <h3 style={{ textAlign: "center" }}>Expenses</h3>
@@ -367,7 +361,10 @@ export default function Home() {
           </div>
         )}
 
-        <AllExpenses monthlyExpenseAMount={monthlyExpenseAMount} yearlyExpenseAMount={yearlyExpenseAMount} />
+        <AllExpenses
+          monthlyExpenseAMount={monthlyExpenseAMount}
+          yearlyExpenseAMount={yearlyExpenseAMount}
+        />
       </div>
     </div>
   );
