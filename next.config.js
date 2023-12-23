@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    SERVER_URL: "http://3.233.122.106:5000/api",
+    SERVER_URL: "http://13.232.19.76/api",
   },
 };
 
