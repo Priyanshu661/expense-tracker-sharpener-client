@@ -159,6 +159,7 @@ export default function Home() {
   const handleLogout = () => {
     localStorage.removeItem("isPremium");
     localStorage.removeItem("token");
+    router.push("/login")
   };
 
   return (
