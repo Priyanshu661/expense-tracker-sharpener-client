@@ -156,12 +156,19 @@ export default function Home() {
       }
     });
   };
+  const handleLogout = () => {
+    localStorage.removeItem("isPremium");
+    localStorage.removeItem("token");
+  };
 
   return (
     <div>
       <div className={Style.container}>
         <div style={{ display: "flex", gap: "20px" }}>
           {" "}
+          <button style={{backgroundColor:"red",color:"white"}} className={Style.btn} onClick={handleLogout}>
+            Logout
+          </button>
           {isPremium && (
             <button className={Style.btn} onClick={download}>
               Download Expenses

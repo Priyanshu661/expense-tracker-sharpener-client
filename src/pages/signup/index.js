@@ -42,6 +42,7 @@ const handleSubmit=()=>{
       console.log(res?.error)
     }else{
       setMsg(res?.message)
+      router.push("/login")
     }
   })
 }
