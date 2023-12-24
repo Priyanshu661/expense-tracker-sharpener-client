@@ -13,7 +13,11 @@ const Signup = () => {
       phone: "",
     });
 
-    const router=useRouter()
+    const router=useRouter();
+
+    const [error,setError]=useState("")
+    const [msg, setMsg] = useState("");
+
   
 
 const handleChange=(e)=>{
@@ -33,9 +37,11 @@ const handleChange=(e)=>{
 const handleSubmit=()=>{
   signup(details).then((res)=>{
     if(res?.error){
+
+      setError(res?.error)
       console.log(res?.error)
     }else{
-      console.log(res?.message)
+      setMsg(res?.message)
     }
   })
 }
@@ -43,6 +49,9 @@ const handleSubmit=()=>{
 
   return (
     <div>
+      <p style={{ color: "red", fontSize: "18px" }}>{error}</p>
+      <p style={{ color: "green", fontSize: "18px" }}>{msg}</p>
+
       <div
         style={{
           display: "flex",

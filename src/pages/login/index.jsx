@@ -9,6 +9,9 @@ const Login = () => {
     password: "",
   });
 
+    const [error, setError] = useState("");
+    const [msg, setMsg] = useState("");
+
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -24,27 +27,29 @@ const Login = () => {
 
   const handleSubmit = () => {
     login(details).then((res) => {
+      setError(res?.message);
       if (res?.error) {
         console.log(res);
+        setError(res?.message)
         // console.log(res?.message);
       } else {
         if (res.token) {
           localStorage.setItem("token", res.token);
 
-          console.log(res)
           if (res?.isPremium) {
             localStorage.setItem("isPremium", res.isPremium);
           }
 
           router.replace("/");
         }
-        console.log(res);
       }
     });
   };
 
   return (
     <div>
+      <p style={{ color: "red", fontSize: "18px" }}>{error}</p>
+      <p style={{ color: "green", fontSize: "18px" }}>{msg}</p>
       <div
         style={{
           display: "flex",
