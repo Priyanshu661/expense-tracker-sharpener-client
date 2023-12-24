@@ -165,21 +165,25 @@ export default function Home() {
   return (
     <div>
       <div className={Style.container}>
-        <div style={{ display: "flex", gap: "10px" }}>
+        {isPremium ? (
+          "You are premium User"
+        ) : (
+          <button className={Style.btn} onClick={handlePayment}>
+            Buy Premium
+          </button>
+        )}
+        <div style={{ display: "flex", gap: "30px", flexWrap: "wrap" }}>
           {" "}
-          <button style={{backgroundColor:"red",color:"white"}} className={Style.btn} onClick={handleLogout}>
+          <button
+            style={{ backgroundColor: "red", color: "white" }}
+            className={Style.btn}
+            onClick={handleLogout}
+          >
             Logout
           </button>
           {isPremium && (
             <button className={Style.btn} onClick={download}>
               Download Expenses
-            </button>
-          )}
-          {isPremium ? (
-            "You are premium User"
-          ) : (
-            <button className={Style.btn} onClick={handlePayment}>
-              Buy Premium
             </button>
           )}
           <button className={Style.btn} onClick={fetchLeaderboard}>
