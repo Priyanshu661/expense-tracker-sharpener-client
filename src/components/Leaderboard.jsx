@@ -49,7 +49,7 @@ const Leaderboard = ({leaderboardData}) => {
                 >
                   <span>{index + 1}</span>
                   <span>{item.name}</span>
-                  <span>{item.totalExpenseAmount}</span>
+                  <span>{item.totalExpenseAmount? item.totalExpenseAmount:0}</span>
                 </div>
               ))}
           </>

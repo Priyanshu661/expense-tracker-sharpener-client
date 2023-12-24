@@ -165,7 +165,7 @@ export default function Home() {
   return (
     <div>
       <div className={Style.container}>
-        <div style={{ display: "flex", gap: "20px" }}>
+        <div style={{ display: "flex", gap: "10px" }}>
           {" "}
           <button style={{backgroundColor:"red",color:"white"}} className={Style.btn} onClick={handleLogout}>
             Logout
